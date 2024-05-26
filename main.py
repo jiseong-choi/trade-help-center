@@ -1,3 +1,5 @@
+import asyncio
+
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -21,5 +23,10 @@ async def on_ready():
     print(f'Logged in as {bot.user.name}')
 
 
-bot.run(TOKEN)
-load_extensions()
+async def main():
+    async with bot:
+        await load_extensions()
+        print('Bot is ready!')
+        await bot.start(TOKEN)
+
+asyncio.run(main())
